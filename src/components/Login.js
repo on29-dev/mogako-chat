@@ -1,11 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component, Fragment } from 'react';
+import { GoogleLogin } from 'react-google-login';
 
 class Login extends Component {
-  render() {
+  constructor(props){
+    super(props);
+    this.state={
+      email:'',
+      username:'',
+      imgUrl:'',
+      idToken:'',
+    }
+  }
+  responseGoogle(res){
+    const tokens = res.tokenObj;
+    const profiles = res.profileObj;
+    this.setState({
+      email:profiles.email,
+      username:profiles.name,
+      imgUrl:profiles.imageUrl,
+      idToken:tokens.id_token
+    })
+  }
+  responseFail(err){console.log(err)}
+  render(){
     return (
-      <div>
-          로그인 컴포넌트
-      </div>
+      <Fragment>
+        <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          buttonText="Google"
+          onSuccess={this.responseGoogle.bind(this)}
+          onFailure={this.responseFail}
+        />
+      </Fragment>
     );
   }
 }
