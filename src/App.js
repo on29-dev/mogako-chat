@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import Header from './components/Header';
-import Mgkmap from './components/Mgkmap';
-import Chatlist from './components/Chatlist';
+// import Header from './components/Header';
+// import Mgkmap from './components/Mgkmap';
+// import Chatlist from './components/Chatlist';
+import Login from './components/Login';
 
 class App extends Component {
   constructor(props){
@@ -19,23 +20,24 @@ class App extends Component {
       },
     }
   }
-  componentDidMount(){
-    navigator.geolocation.getCurrentPosition((position)=>{
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-      this.setState({currentCoords:{longitude: long,latitude: lat}})
-    })
-  }
+  // componentDidMount(){
+  //   navigator.geolocation.getCurrentPosition((position)=>{
+  //     const lat = position.coords.latitude;
+  //     const long = position.coords.longitude;
+  //     this.setState({currentCoords:{longitude: long,latitude: lat}})
+  //   })
+  // }
   render() {
-    const {currentCoords,defaultCoords} = this.state
+    // const {currentCoords,defaultCoords} = this.state
     return (
       <div className="App">
-        <Header></Header>
+        <Login></Login>
+        {/* <Header></Header>
         <Mgkmap
           currentCoords={currentCoords}
           defaultCoords={defaultCoords}
         ></Mgkmap>
-        <Chatlist></Chatlist>
+        <Chatlist></Chatlist> */}
       </div>
     );
   }
