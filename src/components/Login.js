@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
 
 class Login extends Component {
   constructor(props){
@@ -11,6 +12,27 @@ class Login extends Component {
       idToken:'',
     }
   }
+  Signup(){
+    const SIGN_UP_URL='';
+    const {email, username, imgUrl,idToken} = this.state;
+    axios({
+      method: 'post',
+      url: SIGN_UP_URL,
+      data: {
+        email:email,
+        username:username,
+        imgUrl:imgUrl,
+        idToken:idToken
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  
+  }
   responseGoogle(res){
     const tokens = res.tokenObj;
     const profiles = res.profileObj;
@@ -20,6 +42,7 @@ class Login extends Component {
       imgUrl:profiles.imageUrl,
       idToken:tokens.id_token
     })
+    this.Signup()
   }
   responseFail(err){console.log(err)}
   render(){
@@ -27,7 +50,7 @@ class Login extends Component {
       <Fragment>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-          buttonText="Google"
+          buttonText="Sign in with Google"
           onSuccess={this.responseGoogle.bind(this)}
           onFailure={this.responseFail}
         />
