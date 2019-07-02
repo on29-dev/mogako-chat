@@ -22,7 +22,7 @@ class Mgkmap extends Component {
     render() {
         return (
             <div
-                class="main"
+                className="main"
                 ref={this.mapContainer}
             >지도</div>
         );
