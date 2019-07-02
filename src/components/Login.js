@@ -10,11 +10,12 @@ class Login extends Component {
       username:'',
       imgUrl:'',
       idToken:'',
+      accessToken:''
     }
   }
   Signup(){
     const SIGN_UP_URL='';
-    const {email, username, imgUrl,idToken} = this.state;
+    const {email, username, imgUrl,idToken,accessToken} = this.state;
     axios({
       method: 'post',
       url: SIGN_UP_URL,
@@ -22,7 +23,8 @@ class Login extends Component {
         email:email,
         username:username,
         imgUrl:imgUrl,
-        idToken:idToken
+        idToken:idToken,
+        accessToken:accessToken
       }
     })
     .then(function (response) {
@@ -40,7 +42,8 @@ class Login extends Component {
       email:profiles.email,
       username:profiles.name,
       imgUrl:profiles.imageUrl,
-      idToken:tokens.id_token
+      idToken:tokens.id_token,
+      accessToken:tokens.access_token
     })
     this.Signup()
   }
