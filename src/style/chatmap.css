@@ -6,6 +6,6 @@
 .chat-list li:hover{background:aqua;cursor:pointer}
 .chat-item-title{display:inline-block;margin-right:8px;font-weight:bold;font-size:18px;vertical-align:middle}
 .chat-item-people{border:1px solid gray;background:#f0f0f0;color:gray;font-size:12px;padding:1px 4px 0 3px;vertical-align:middle;text-align:justify;box-sizing:border-box}
-.chat-item-message{display:inline-block;margin:8px 0 8px 0}
+.chat-item-message{margin:8px 0 8px 0}
 .chat-item-time{position:absolute;top:8px;right:8px;font-size:14px;color:#676767}
 .chat-hide{background:white;position:absolute;width:30px;height:75px;top:50%;transform:translateY(-50%);left:-30px}
