@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
+import { Link } from 'react-router-dom';
 import '../style/mgkmap.css';
 
 class Chatlist extends Component {
@@ -19,9 +20,13 @@ class Chatlist extends Component {
     for (let item of chatrooms){
       chatlist.push(
         <li key={item.id}>
-          <h2 className="chat-item-title">{item.title}</h2><span className="chat-item-people">{item.memberNum}</span>
-          <div className="chat-item-message">{item.recentMsg}</div>
-          <time className="chat-item-time">{item.recentTime}</time>
+          <Link to={`/chatroom/${item.id}`}>
+            <div>
+              <h2 className="chat-item-title">{item.title}</h2><span className="chat-item-people">{item.memberNum}</span>
+              <div className="chat-item-message">{item.recentMsg}</div>
+              <time className="chat-item-time">{item.recentTime}</time>
+            </div>
+          </Link>
         </li>
       )
     }

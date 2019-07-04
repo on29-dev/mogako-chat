@@ -3,7 +3,7 @@ import { Route,BrowserRouter,Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Mainapp from './components/Mainapp';
-
+import Chatroom from './components/Chatroom';
 
 class App extends Component {
   render() {
@@ -11,6 +11,7 @@ class App extends Component {
       <BrowserRouter>
         <Route exact path="/" component={Login}/>
         <PrivateRoute path="/chatlist" component={Mainapp}/>
+        <PrivateRoute path="/chatroom/:chatId" component={Chatroom}/>
       </BrowserRouter>
     );
   }
