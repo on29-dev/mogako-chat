@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import '../style/mgkmap.css';
 
 class Chatlist extends Component {
@@ -14,31 +14,26 @@ class Chatlist extends Component {
     }
   }
 
-  chatRoom(){
-    let chatlist=[];
-    const chatrooms = Array.from(this.state.chatList);
-    for (let item of chatrooms){
-      chatlist.push(
-        <li key={item.id}>
-          <Link to={`/chatroom/${item.id}`}>
-            <div>
-              <h2 className="chat-item-title">{item.title}</h2><span className="chat-item-people">{item.memberNum}</span>
-              <div className="chat-item-message">{item.recentMsg}</div>
-              <time className="chat-item-time">{item.recentTime}</time>
-            </div>
-          </Link>
+  render() {
+    const chatlist=[...this.state.chatList].map(item=>{
+      return (
+        <li key={item.id}
+        onClick={_=>{this.props.history.push({
+          pathname: "/chatroom",
+          state: {chatId:item.id}})}
+        }
+        >
+          <h2 className="chat-item-title">{item.title}</h2><span className="chat-item-people">{item.memberNum}</span>
+          <div className="chat-item-message">{item.recentMsg}</div>
+          <time className="chat-item-time">{item.recentTime}</time>
         </li>
       )
-    }
-    return chatlist;
-  }
-
-  render() {
+    })
     return (
       <section id="chat" className="chat aside">
         <h1 className="hidden">채팅방리스트</h1>
         <ul id="chatList" className="chat-list">
-          {this.chatRoom()}
+          {chatlist}
         </ul>
         <button id="chatHide" className="chat-hide"><span className="hidden">챗팅리스트 숨기기</span></button>
     </section>
@@ -46,4 +41,4 @@ class Chatlist extends Component {
   }
 }
 
-export default Chatlist;
+export default withRouter(Chatlist);

@@ -11,7 +11,7 @@ class App extends Component {
       <BrowserRouter>
         <Route exact path="/" component={Login}/>
         <PrivateRoute path="/chatlist" component={Mainapp}/>
-        <PrivateRoute path="/chatroom/:chatId" component={Chatroom}/>
+        <PrivateRoute path="/chatroom" component={Chatroom}/>
       </BrowserRouter>
     );
   }

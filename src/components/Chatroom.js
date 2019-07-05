@@ -4,7 +4,7 @@ class Chatroom extends Component {
   constructor(props){
     super(props);
     this.state={
-      chatroomId:this.props.match.params.chatId,
+      chatroomId:this.props.location.state.chatId,
     }
   }
   
