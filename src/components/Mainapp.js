@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import Header from './Header';
 import Mgkmap from './Mgkmap';
 import Chatlist from './Chatlist';
+import '../style/chatmap.css'
 
 class Mainapp extends Component {
   constructor(props){
@@ -29,7 +29,6 @@ class Mainapp extends Component {
     const {currentCoords,defaultCoords} = this.state
     return (
       <Fragment>
-        <Header></Header>
         <Mgkmap
           currentCoords={currentCoords}
           defaultCoords={defaultCoords}

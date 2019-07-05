@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-import '../style/mgkmap.css';
 
 class Chatlist extends Component {
   constructor(props){

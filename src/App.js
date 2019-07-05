@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <Header></Header>
         <Route exact path="/" component={Login}/>
         <PrivateRoute path="/chatlist" component={Mainapp}/>
         <PrivateRoute path="/chatroom" component={Chatroom}/>
@@ -18,7 +19,7 @@ class App extends Component {
 }
 
 const isAuth = {
-  isAuthenticated: true,
+  isAuthenticated:true,
   login(cb) {
     this.isAuthenticated = true
     // setTimeout(cb, 100)
@@ -39,5 +40,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         }} />
   )} />
 )
+
+const Header=_=>{
+  if(isAuth.isAuthenticated === true){
+    return (<header id="gnb" className="gnb">
+        <h1 className="logo">모각코 맵(채팅)</h1>
+        <nav className="navigator">
+          <ul>
+            <li>마이페이지</li>
+            <li>로그아웃</li>
+          </ul>
+        </nav>
+    </header>)
+    } else {return null}
+}
 
 export default App;
