@@ -19,11 +19,14 @@ class Mainapp extends Component {
     }
   }
   componentDidMount(){
-    navigator.geolocation.getCurrentPosition((position)=>{
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-      this.setState({currentCoords:{longitude: long,latitude: lat}})
-    })
+    navigator.geolocation.getCurrentPosition(
+      res=>{
+        const lat = res.coords.latitude;
+        const long = res.coords.longitude;
+        this.setState({currentCoords:{longitude: long,latitude: lat}})
+      },
+      err=>console.log('[getCurrentPosition] err',err)
+    )
   }
   render() {
     const {currentCoords,defaultCoords} = this.state
