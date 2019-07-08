@@ -16,7 +16,7 @@ class Mgkmap extends Component {
             title:'default 위치',
             map: this.map,
             icon:{
-                content: '<div style="width:20px;height:20px;background:red;border-radius:50%"></div>'
+                content: '<div style="width:20px;height:20px;background:#FF412E;border-radius:50%"></div>'
             }
         })
     }
@@ -41,7 +41,7 @@ class Mgkmap extends Component {
             title:'현위치',
             map: this.map,
             icon:{
-                content: '<div style="width:20px;height:20px;background:red;border-radius:50%"></div>'
+                content: '<div style="width:20px;height:20px;background:#FF412E;border-radius:50%"></div>'
             }
         })
         map.setCenter(currentCoords);

@@ -1,11 +1,11 @@
-.aside{background:skyblue}
+.aside{background:#f9f9f9;box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.15);}
 .chat-toggle{right:-400px}
-.chat-list{background:greenyellow}
-.chat-list li {background:beige;border:1px solid gray;border-bottom:0;box-sizing:border-box;height:70px;padding:8px;overflow:hidden;position:relative}
-.chat-list li:last-child{border-bottom:1px solid gray}
-.chat-list li:hover{background:aqua;cursor:pointer}
+.chat-item {background:#fff;border-bottom:1px solid #eee;box-sizing:border-box;height:70px;padding:8px;overflow:hidden;position:relative}
+.disable {background:gray;cursor: default}
+.chat-list li:last-child{border-bottom:1px solid #eee}
+.active:hover{background:#FFD1C7;cursor:pointer}
 .chat-item-title{display:inline-block;margin-right:8px;font-weight:bold;font-size:18px;vertical-align:middle}
 .chat-item-people{border:1px solid gray;background:#f0f0f0;color:gray;font-size:12px;padding:1px 4px 0 3px;vertical-align:middle;text-align:justify;box-sizing:border-box}
-.chat-item-message{margin:8px 0 8px 0}
+.chat-item-message{margin:8px 0 8px 0;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
 .chat-item-time{position:absolute;top:8px;right:8px;font-size:14px;color:#676767}
 .chat-hide{background:white;position:absolute;width:30px;height:75px;top:50%;transform:translateY(-50%);left:-30px}
