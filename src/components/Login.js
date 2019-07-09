@@ -13,7 +13,7 @@ class Login extends Component {
       accessToken:''
     }
   }
-  Signup(){
+  signup(){
     const SIGN_UP_URL='';
     const {email, username, imgUrl,idToken,accessToken} = this.state;
     axios({
