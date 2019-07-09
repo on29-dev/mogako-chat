@@ -45,7 +45,7 @@ class Login extends Component {
       idToken:tokens.id_token,
       accessToken:tokens.access_token
     })
-    this.Signup()
+    this.signup()
   }
   responseFail(err){console.log(err)}
   render(){
