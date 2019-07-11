@@ -7,14 +7,15 @@ class Mypage extends Component {
     this.state={
       email:this.props.email,
       username:this.props.username,
+      imgUrl:this.props.imgUrl,
     }
     this.fileInput = React.createRef();
   }
   editInfo(){
     const EDIT_INFO_URL= '';
-    const {email, username, imgUrl} = this.state;
+    const {email, username} = this.state;
     axios({method: 'post', url: EDIT_INFO_URL,
-      data: {email:email,username:username,imgUrl:this.fileInput,}
+      data: {email:email,username:username,}
     })
     .then(function (response) {console.log(response);})
     .catch(function (error) {console.log(error);});
@@ -23,16 +24,7 @@ class Mypage extends Component {
   inputFormHandler(e){
     this.setState({[e.target.name]:e.target.value})
   }
-  // fileFormHandler(e) {
-  //   e.preventDefault();
-  //   alert(
-  //     `Selected file - ${
-  //       this.fileInput.current.files[0].name
-  //     }`
-  //   );
-  // }
   render(){
-    console.log(this.props.username)
     return (
       <section>
         <h2>회원정보수정</h2>
@@ -52,9 +44,32 @@ class Mypage extends Component {
             value={this.state.username}
             onChange={e=>this.inputFormHandler(e)}
           />
-          {/* <input type="file" name="img" ref={this.fileInput} /> */}
           <input type="submit"/>
         </form>
+        <form action="/updateImg" method="POST"
+          onSubmit={e=>{
+            e.preventDefault();
+            this.props.onSubmit(
+              this.state.img,
+            );
+          }}
+        >
+          <input type="file" name="img" ref={this.fileInput}
+            onChange={e=>{
+              e.preventDefault();
+              const file = this.fileInput.current.files[0];
+              this.setState({
+                img:file,
+                imgUrl:URL.createObjectURL(file)
+              })
+            }}
+          />
+          <input type="submit"/>
+        </form>
+        <img style={{width: 500 + 'px'}} 
+          src={this.state.img ? URL.createObjectURL(this.state.img) : ""}
+          alt={this.state.img ? this.state.img.name : "미리보기"}
+        />
       </section>
     );
   }
