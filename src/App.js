@@ -1,32 +1,51 @@
 import React, {Component} from 'react';
-import { Route,BrowserRouter,Redirect,Link } from 'react-router-dom';
+import { Route,BrowserRouter,Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Mainapp from './components/Mainapp';
 import Chatroom from './components/Chatroom';
 import Mypage from './components/Mypage';
+import ModalPortal from './ModalPortal';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state={
+      modal:false,
       memberInfo:{
         email:'abc@def.ghi',
         username:'mockUser',
-        imgUrl:'mockImage',
+        imgUrl:'https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQkBIqz97vfqChDxlee-nU0_DHI_5UkaVftQxuqBvxMC9BgEEE-p173mxlknp0gN8uw&_nc_ht=scontent-icn1-1.xx&oh=b6c0fda9d1a78a65f19992646ca0f8b1&oe=5DBA8EE9',
         idToken:'123123123idTkn',
         accessToken:'123123123acsTkn'
       },
     }
   }
+  handleOpenModal = () => {
+    console.log('handleOpenModal')
+    this.setState({
+      modal: true
+    });
+  };
+  handleCloseModal = () => {
+    this.setState({
+      modal: false
+    });
+  };
   render() {
     return (
       <BrowserRouter>
-        <Header></Header>
+        <Header onClick={this.handleOpenModal}></Header>
         <Route exact path="/" component={Login}/>
         <PrivateRoute path="/chatlist" component={Mainapp}/>
         <PrivateRoute path="/chatroom" component={Chatroom} {...this.state.memberInfo}/>
-        <PrivateRoute path="/mypage" component={Mypage} {...this.state.memberInfo}/>
+        {this.state.modal && (
+          <ModalPortal>
+            <PrivateModal path="/mypage" component={Mypage} {...this.state.memberInfo}
+            onClose={this.handleCloseModal}
+            />
+          </ModalPortal>
+        )}
       </BrowserRouter>
     );
   }
@@ -55,13 +74,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
-const Header=_=>{
+const PrivateModal = ({ component: Component, ...rest }) => (
+  isAuth.isAuthenticated === true
+    ? <Component {...rest}/>
+    : <Redirect to={'/'} />
+)
+
+const Header=({onClick})=>{
   if(isAuth.isAuthenticated === true){
     return (<header id="gnb" className="gnb">
         <h1 className="logo">모각코 맵(채팅)</h1>
         <nav className="navigator">
           <ul>
-            <li><Link to="/mypage">마이페이지</Link></li>
+            <li onClick={onClick}>마이페이지</li>
             <li>로그아웃</li>
           </ul>
         </nav>
