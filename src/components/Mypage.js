@@ -8,6 +8,7 @@ class Mypage extends Component {
       email:this.props.email,
       username:this.props.username,
       imgUrl:this.props.imgUrl,
+      img:null,
     }
     this.fileInput = React.createRef();
   }
@@ -66,9 +67,9 @@ class Mypage extends Component {
           />
           <input type="submit"/>
         </form>
-        <img style={{width: 500 + 'px'}} 
-          src={this.state.img ? URL.createObjectURL(this.state.img) : ""}
-          alt={this.state.img ? this.state.img.name : "미리보기"}
+        <img style={{width: 100 + 'px'}} 
+          src={this.state.img ? URL.createObjectURL(this.state.img) : (this.state.imgUrl)}
+          alt={this.state.img ? this.state.img.name : "현재 이미지"}
         />
       </section>
     );
