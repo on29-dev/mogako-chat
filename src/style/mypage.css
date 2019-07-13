@@ -12,7 +12,17 @@
 
 .mypage {
   background: white;
-  padding: 1rem;
+  position: relative;
   width: 300px;
   height: auto;
+}
+
+.mypage-title{
+  padding:20px 28px;
+}
+
+.btn-close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }

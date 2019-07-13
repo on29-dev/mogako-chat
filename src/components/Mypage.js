@@ -30,7 +30,7 @@ class Mypage extends Component {
     return (
       <section className="modal">
         <div className="mypage">
-          <h2>회원정보수정</h2>
+          <h2 className="mypage-title">회원정보수정</h2>
           <form action="/update" method="POST"
             onSubmit={e=>{
               e.preventDefault();
@@ -73,7 +73,7 @@ class Mypage extends Component {
             src={this.state.img ? URL.createObjectURL(this.state.img) : (this.state.imgUrl)}
             alt={this.state.img ? this.state.img.name : "현재 이미지"}
           />
-          <button onClick={this.props.onClose}>닫기</button>
+          <button className="btn-close" onClick={this.props.onClose}>닫기</button>
         </div>
       </section>
     );
