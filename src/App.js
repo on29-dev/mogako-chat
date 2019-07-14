@@ -21,17 +21,20 @@ class App extends Component {
       },
     }
   }
-  handleOpenModal = () => {
+  handleOpenModal=_=>{
     console.log('handleOpenModal')
     this.setState({
       modal: true
     });
   };
-  handleCloseModal = () => {
+  handleCloseModal=_=>{
     this.setState({
       modal: false
     });
   };
+  onSubmit=(...data)=>{
+    console.log('Submit', ...data)
+  }
   render() {
     return (
       <BrowserRouter>
@@ -43,6 +46,7 @@ class App extends Component {
           <ModalPortal>
             <PrivateModal path="/mypage" component={Mypage} {...this.state.memberInfo}
             onClose={this.handleCloseModal}
+            onSubmit={this.onSubmit}
             />
           </ModalPortal>
         )}
@@ -86,7 +90,7 @@ const Header=({onClick})=>{
         <h1 className="logo">모각코 맵(채팅)</h1>
         <nav className="navigator">
           <ul>
-            <li onClick={onClick}>마이페이지</li>
+            <li onClick={onClick} style={{cursor:'pointer'}} >마이페이지</li>
             <li>로그아웃</li>
           </ul>
         </nav>
