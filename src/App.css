@@ -4,7 +4,7 @@ ul{padding:0;margin:0}
 li{list-style:none}
 body{margin:0}
 button{border:0}
-button:focus{outline:none}
+input[type=submit],button:focus{outline:none}
 .hidden{visibility:hidden;height:0;width:0}
 .visible{visibility:visible}
 
