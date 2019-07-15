@@ -27,11 +27,13 @@ class Login extends Component {
         accessToken:accessToken
       }
     })
-    .then(function (response) {
-      console.log(response);
+    .then(function (res) {
+      console.log('[회원가입] 완료')
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(function (err) {
+      console.log('[회원가입] 실패')
+      console.log(err);
     });
   
   }
