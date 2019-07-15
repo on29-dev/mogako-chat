@@ -50,7 +50,8 @@
   left:50%;
   transform:translateX(-50%);
   width:200px;
-  height:200px
+  height:200px;
+  text-align:center;
 }
 .img-uploader:hover{
   background:rgba(0,0,0,0.7);
@@ -59,7 +60,14 @@
 }
 .img-uploader:hover::after{
   color:#fff;
-  content: "이미지 변경";
+  font-size:18px;
+  content: "클릭하여\a이미지 변경";
+  white-space:pre;
+  line-height: 1.5;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 .mypage-img{
   width:200px;
@@ -84,7 +92,7 @@
   border-radius:4px;
   padding:12px;
   box-sizing: border-box;
-  margin-bottom:20px;
+  margin-bottom:8px;
   color:#fff;
   font-weight: 900;
   background:#007a5a;

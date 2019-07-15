@@ -15,9 +15,9 @@ class Mypage extends Component {
   }
   editInfo(){
     const EDIT_INFO_URL= '';
-    const {email, username} = this.state;
+    const {username} = this.state;
     axios({method: 'post', url: EDIT_INFO_URL,
-      data: {email:email,username:username,}
+      data: {username:username,}
     })
     .then(function (response) {console.log(response);})
     .catch(function (error) {console.log(error);});
@@ -26,6 +26,7 @@ class Mypage extends Component {
   inputFormHandler(e){
     this.setState({[e.target.name]:e.target.value})
   }
+
   render(){
     return (
       <section className="modal">
@@ -36,35 +37,30 @@ class Mypage extends Component {
             src={this.state.img ? URL.createObjectURL(this.state.img) : (this.state.imgUrl)}
             alt={this.state.img ? this.state.img.name : "현재 이미지"}
             />
-            <label className="img-uploader" htmlFor="profileImg"><span className="hidden">업로드</span></label>
+            <label className="img-uploader" htmlFor="profileImg"><span className="hidden">프로필 이미지 변경</span></label>
             <input type="file" name="img" id="profileImg" className="hidden"
               ref={this.fileInput}
               onChange={e=>{
                 e.preventDefault();
-                console.log(this.fileInput.current.files);
                 if(this.fileInput.current.files.length === 0) {console.log('파일 업로드가 취소되었습니다.')}
                 else {
                   const file = this.fileInput.current.files[0];
                   this.setState({
                     img:file,
                     imgUrl:URL.createObjectURL(file)
-                  });
-                  this.props.onSubmit(this.state.img);
+                  },_=>{this.props.onSubmit(this.state.img)});
                 }
               }}
             />
             <form action="/update" method="POST"
               onSubmit={e=>{
                 e.preventDefault();
-                this.props.onSubmit(
-                  this.state.email, this.state.username
-                );
+                this.props.onSubmit(this.state.username);
               }}
             >
               <label htmlFor="email">Email</label>
               <input type="email" name="email" id="email"
-                value={this.state.email}
-                onChange={e=>this.inputFormHandler(e)}
+                value={this.state.email} disabled="disabled"
               />
               <label htmlFor="username">Username</label>
               <input type="text" name="username" id="username"
