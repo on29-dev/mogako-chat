@@ -1,7 +1,7 @@
 .aside{background:#f9f9f9;box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.15);}
 .chat-toggle{right:-400px}
 .chat-item {background:#fff;border-bottom:1px solid #eee;box-sizing:border-box;height:70px;padding:8px;overflow:hidden;position:relative}
-.disable {background:gray;cursor: default}
+.disable {background:#aeaeae;cursor: default}
 .chat-list li:last-child{border-bottom:1px solid #eee}
 .active:hover{background:#FFD1C7;cursor:pointer}
 .chat-item-title{display:inline-block;margin-right:8px;font-weight:bold;font-size:18px;vertical-align:middle}
