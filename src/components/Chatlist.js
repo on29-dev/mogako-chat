@@ -5,14 +5,14 @@ class Chatlist extends Component {
   constructor(props){
     super(props);
     this.state={
-      chatList:[
-        {id:1,title:'채팅방1',memberNum:5,recentMsg:'최근메시지1최근메시지1최근메시지1최근메시지1최근메시지1최근메시지1최근메시지1',recentTime:'오후 3:15',isNear:true},
-        {id:2,title:'채팅방2',memberNum:32,recentMsg:'최근메시지2',recentTime:'오후 4:15',isNear:true,},
-        {id:3,title:'채팅방3',memberNum:1,recentMsg:'최근메시지3',recentTime:'오후 12:12',isNear:true,},
-        {id:4,title:'비활성 채팅방1',memberNum:4,recentMsg:'최근메시지3',recentTime:'오후 6:11',isNear:false,},
-        {id:5,title:'비활성 채팅방2',memberNum:9,recentMsg:'최근메시지3',recentTime:'오후 11:04',isNear:false,},
-      ]
+      chatList:this.props.chatList,
+      chatRoomTitle:undefined,
+      chatRoomTitleDefault:'다같이 모여서 코딩해요!'
     }
+  }
+  
+  inputFormHandler(e){
+    this.setState({[e.target.name]:e.target.value})
   }
 
   render() {
@@ -46,6 +46,26 @@ class Chatlist extends Component {
       <section id="chat" className="chat aside">
         <h1 className="hidden">채팅방리스트</h1>
         <ul id="chatList" className="chat-list">
+          <li className="chat-item">
+            <i className="fas fa-plus-circle"></i>
+            채팅방 만들기
+            <form action="/chatroom/create" method="POST"
+              onSubmit={e=>{
+                e.preventDefault();
+                const chatRoomTitle = this.state.chatRoomTitle === undefined 
+                  ? this.state.chatRoomTitleDefault 
+                  : this.state.chatRoomTitle
+                this.props.onSubmit(chatRoomTitle);
+              }}
+            >
+              <input type="text" name="chatRoomTitle" id="chatRoomTitle" placeholder="채팅방 이름을 써주세요"
+                value={this.state.chatRoomTitle === undefined ? this.state.chatRoomTitleDefault : this.state.chatRoomTitle}
+                onChange={e=>{
+                  this.inputFormHandler(e)}}
+              />
+              {/* <input type="submit" className="btn btn-submit" value="수정하기"/> */}
+            </form>
+          </li>
           {listItemActive}
           {listItemDisable}
         </ul>
