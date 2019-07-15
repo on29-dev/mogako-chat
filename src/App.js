@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Route,BrowserRouter,Redirect } from 'react-router-dom';
-import './App.css';
+import axios from 'axios';
 import Login from './components/Login';
 import Mainapp from './components/Mainapp';
 import Chatroom from './components/Chatroom';
 import Mypage from './components/Mypage';
 import ModalPortal from './ModalPortal';
+import './App.css';
 
 class App extends Component {
   constructor(props){
@@ -15,14 +16,13 @@ class App extends Component {
       memberInfo:{
         email:'abc@def.ghi',
         username:'mockUser',
-        imgUrl:'https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQkBIqz97vfqChDxlee-nU0_DHI_5UkaVftQxuqBvxMC9BgEEE-p173mxlknp0gN8uw&_nc_ht=scontent-icn1-1.xx&oh=b6c0fda9d1a78a65f19992646ca0f8b1&oe=5DBA8EE9',
+        imgUrl:'https://i.stack.imgur.com/34AD2.jpg',
         idToken:'123123123idTkn',
         accessToken:'123123123acsTkn'
       },
     }
   }
   handleOpenModal=_=>{
-    console.log('handleOpenModal')
     this.setState({
       modal: true
     });
@@ -33,7 +33,18 @@ class App extends Component {
     });
   };
   onSubmit=(...data)=>{
-    console.log('Submit', ...data)
+    const SIGN_UP_URL='';
+    console.log('Submit', ...data);
+    axios({method:'post', url:SIGN_UP_URL, data:{...data}})
+      .then(function (res) {
+        console.log('[회원정보 수정] 완료')
+        console.log(res);
+        this.handleCloseModal();
+      })
+      .catch(function (err) {
+        console.log('[회원정보 수정] 실패')
+        console.log(err);
+      });
   }
   render() {
     return (
