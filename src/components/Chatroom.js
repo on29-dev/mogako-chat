@@ -22,7 +22,7 @@ class Chatroom extends Component {
     return (
       <div>
         {this.state.chatroomId}번 채팅방
-        <form action="create" method="post"
+        <form action={`/chatroom/${this.state.chatroomId}`} method="post"
           onSubmit={e=>{
               e.preventDefault();
               this.sendMessage(e.target.chatMsg.value);
