@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SockJsClient from 'react-stomp';
+import '../style/chatroom.css';
 
 class Chatroom extends Component {
   constructor(props){
@@ -21,22 +22,31 @@ class Chatroom extends Component {
   render() {
     return (
       <div>
-        {this.state.chatroomId}번 채팅방
+        {/* {this.state.chatroomId}번 채팅방 */}
         <form action={`/chatroom/${this.state.chatroomId}`} method="post"
           onSubmit={e=>{
               e.preventDefault();
               this.sendMessage(e.target.chatMsg.value);
           }}
         >
-          <input type="text" name="chatMsg"/>
-          <input type="submit"/>
+        <section id="chat-room" className="main chat-room">
+            <div id="chat-content" className="chat-content">
+                <div className="chat-date">2019년 6월 7일(금요일)</div>
+                <div className="profile-image" tabIndex="-1"></div>
+                <span className="profile-name">작성자</span><time className="profile-time">오후 3:14</time>
+                <div className="chat-message">윈 10 쓰시는 분들 중에.</div>
+            </div>
+            <input type="text" id="inputChat" className="input-chat" name="chatMsg"/>
+            <input type="submit" className="hidden"/>
+        </section>
+
         </form>
-        <SockJsClient 
+        {/* <SockJsClient 
           url={`${process.env.REACT_APP_SERVER_SOCKET_ID}/mogako-websocket`}
           topics={[`/chatroom/${this.state.chatroomId}`]}
           onMessage={(msg) => { console.log('구독 중인 채팅방에서 타인이 보내는 메시지',msg); }}
           ref={ (client) => { this.clientRef = client }}
-        />
+        /> */}
       </div>
     );
   }

@@ -1,0 +1,8 @@
+.chat-room{padding:0 10px;height:calc(100vh - 40px);position:relative}
+.chat-content{position:absolute;bottom:54px;right:0;left:0;padding:0 10px 5px 10px;max-height:calc(100vh - 112px);overflow:scroll}
+.input-chat{height:44px;position:absolute;width:calc(100% - 10px - 10px);bottom:10px;box-sizing:border-box;border:2px solid #616061;border-radius:5px;font-size:15px;padding:9px}
+.chat-date{background:#dfdfdf;padding:8px 0;text-align:center;border-radius:5px;margin-bottom:10px}
+.profile-image{background:skyblue;width:36px;height:36px;border-radius:50%;float:left;margin-right:14px}
+.profile-name{line-height:1px;margin-right:6px;color:#1d1c1d;font-weight:700;}
+.profile-time{font-size:12px;color:#616061}
+.chat-message{margin:4px 0 0 50px}
