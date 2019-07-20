@@ -38,7 +38,7 @@ class Mainapp extends Component {
   }
   onSubmit=(...data)=>{
     if(!this.state.currentCoords.latitude || !this.state.currentCoords.longitude) {
-      throw '아직 현재 위치를 잡지 못했습니다.';
+      // throw '아직 현재 위치를 잡지 못했습니다.'
     } else {
       const dataLoad = {
         chatRoomTitle: String(...data),
@@ -48,14 +48,18 @@ class Mainapp extends Component {
       const SIGN_UP_URL='/chatroom/create';
       console.log('Submit', ...data);
       axios({method:'post', url:SIGN_UP_URL, data:JSON.stringify(dataLoad)})
-        .then(function (res) {
+        .then(res => {
           console.log('[채팅방 개설] 완료', ...data)
-          console.log(res);
+          console.log('res',res);
+          this.props.history.push({
+            pathname: "/chatroom",
+            state: {chatRoomId:res.id}
+          })
         })
-        .catch(function (err) {
+        .catch(err => {
           console.log('[채팅방 개설] 실패', ...data)
           console.log(err);
-        });
+        })
     }
   }
   render() {

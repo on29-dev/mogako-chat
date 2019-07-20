@@ -23,7 +23,7 @@ class Chatlist extends Component {
         <li className="chat-item active" key={item.id}
         onClick={_=>{this.props.history.push({
           pathname: "/chatroom",
-          state: {chatId:item.id}})}
+          state: {chatRoomId:item.id}})}
         }
         >
           <h2 className="chat-item-title">{item.title}</h2><span className="chat-item-people">{item.memberNum}</span>
