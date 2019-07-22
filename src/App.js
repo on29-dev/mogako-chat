@@ -16,10 +16,12 @@ class App extends Component {
       memberInfo:{
         email:'abc@def.ghi',
         username:'mockUser',
+        userSkill:['JavaScript'],
         imgUrl:'https://i.stack.imgur.com/34AD2.jpg',
         idToken:'123123123idTkn',
         accessToken:'123123123acsTkn'
       },
+      skills: ["Python","Java","JavaScript","HTML","CSS","C#","PHP","C/C++","R","Objective-C","Swift","SQL","NoSQL","Matlab","TypeScript","Ruby","VBA","Kotlin","Go","Scala","Visual Basic","Perl","Rust","Lua", "없음"]
     }
   }
   handleOpenModal=_=>{
@@ -55,7 +57,7 @@ class App extends Component {
         <PrivateRoute path="/chatroom" component={Chatroom} {...this.state.memberInfo}/>
         {this.state.modal && (
           <ModalPortal>
-            <PrivateModal path="/mypage" component={Mypage} {...this.state.memberInfo}
+            <PrivateModal path="/mypage" component={Mypage} {...this.state.memberInfo} skills={this.state.skills}
             onClose={this.handleCloseModal}
             onSubmit={this.onSubmit}
             />

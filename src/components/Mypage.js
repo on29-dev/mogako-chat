@@ -6,8 +6,10 @@ class Mypage extends Component {
   constructor(props){
     super(props);
     this.state={
+      skills:this.props.skills,
       email:this.props.email,
       username:this.props.username,
+      userSkill:this.props.userSkill,
       imgUrl:this.props.imgUrl,
       img:null,
     }
@@ -24,9 +26,15 @@ class Mypage extends Component {
   }
 
   inputFormHandler(e){
-    this.setState({[e.target.name]:e.target.value})
+    (e.target.name === "userSkill")
+      ? this.setState({[e.target.name]:[e.target.value]}) 
+      : this.setState({[e.target.name]:e.target.value})
   }
 
+  renderSelOpt(){
+    const skills = this.state.skills
+    return skills.map(item=><option key={skills.indexOf(item)+1} value={item}>{item}</option>)
+  }
   render(){
     return (
       <section className="modal">
@@ -67,6 +75,12 @@ class Mypage extends Component {
                 value={this.state.username}
                 onChange={e=>this.inputFormHandler(e)}
               />
+              <label htmlFor="username">Skill (only 1)</label>
+              <select value={this.state.userSkill[0]} type="text" name="userSkill" id="userSkill"
+                onChange={e=>this.inputFormHandler(e)}
+              >
+                {this.renderSelOpt()}
+              </select>
               <input type="submit" className="btn btn-submit" value="수정하기"/>
             </form>
           </div>
