@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import '../style/mgkmap.css'
 
 class Mgkmap extends Component {
@@ -23,9 +23,15 @@ class Mgkmap extends Component {
     render() {
         return (
             <div
-                className="main"
+                className="main map"
                 ref={this.mapContainer}
-            >지도</div>
+            >지도
+                <div className="map-element">
+                    인증됨(주소표시)
+                    <span className="btn btn-auth-location">재인증하기</span>
+                </div>
+                
+            </div>
         );
     }
 
@@ -45,7 +51,24 @@ class Mgkmap extends Component {
             }
         })
         map.setCenter(currentCoords);
+        this.reverseGeocode(currentCoords)
     }
-}
+    reverseGeocode(currentCoords){
+      window.naver.maps.Service.reverseGeocode({
+        coords: currentCoords,
+        orders:'admcode',
+      }, (status, response)=>{
+        if (status !== window.naver.maps.Service.Status.OK) {
+            return alert('[Naver map]Something wrong!');
+        }
 
+        let result = response.v2, // 검색 결과의 컨테이너
+            items = result.results; // 검색 결과의 배열
+
+        // do Something
+        console.log(result);
+        console.log(items[0].region.area3.name);
+      });
+  }
+}
 export default Mgkmap;
