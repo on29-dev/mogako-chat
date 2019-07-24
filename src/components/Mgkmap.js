@@ -2,6 +2,13 @@ import React, {Component, Fragment} from 'react';
 import '../style/mgkmap.css'
 
 class Mgkmap extends Component {
+    constructor(props){
+      // 초기화 담당
+      super(props);
+      this.state = {
+        currentAddress:''
+      }
+    }
   mapContainer = React.createRef();
 
   componentDidMount(){
@@ -27,8 +34,8 @@ class Mgkmap extends Component {
                 ref={this.mapContainer}
             >지도
                 <div className="map-element">
-                    인증됨(주소표시)
-                    <span className="btn btn-auth-location">재인증하기</span>
+                    위치인증: {this.state.currentAddress}
+                    <button className="btn btn-auth-location">재인증하기</button>
                 </div>
                 
             </div>
@@ -54,21 +61,25 @@ class Mgkmap extends Component {
         this.reverseGeocode(currentCoords)
     }
     reverseGeocode(currentCoords){
-      window.naver.maps.Service.reverseGeocode({
-        coords: currentCoords,
-        orders:'admcode',
-      }, (status, response)=>{
-        if (status !== window.naver.maps.Service.Status.OK) {
-            return alert('[Naver map]Something wrong!');
-        }
+        window.naver.maps.Service.reverseGeocode({
+            coords: currentCoords,
+            orders:'admcode',
+        }, (status, response)=>{
+            if (status !== window.naver.maps.Service.Status.OK) {
+                return alert('[Naver map]Something wrong!');
+            }
 
-        let result = response.v2, // 검색 결과의 컨테이너
-            items = result.results; // 검색 결과의 배열
+            let result = response.v2, // 검색 결과의 컨테이너
+                items = result.results; // 검색 결과의 배열
 
-        // do Something
-        console.log(result);
-        console.log(items[0].region.area3.name);
-      });
-  }
+            // do Something
+            console.log(result);
+            console.log(items[0].region.area3.name);
+            if(this.state.currentAddress !== items[0].region.area3.name){
+                this.setState({currentAddress:items[0].region.area3.name});
+            }
+        })
+    };
 }
+
 export default Mgkmap;
