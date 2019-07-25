@@ -18,3 +18,25 @@ input:disabled{background: #aeaeae}
 .logo{position:absolute;top:50%;left:10px;transform:translateY(-50%)}
 
 .aside{width:400px;position:absolute;top:40px;right:0;height:calc(100% - 40px);transition:all 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)}
+
+.btn{border-radius:4px}
+
+.modal-block{
+  background: rgba(29,28,29,.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index:998;
+}
+
+.modal-window {
+  background: white;
+  border-radius:8px;
+  position: relative;
+  z-index:999;
+}

@@ -1,12 +1,16 @@
-import React, {Component, Fragment} from 'react';
-import '../style/mgkmap.css'
+import React, {Component} from 'react';
+import ModalPortal from '../ModalPortal';
+import PrivateModal from './PrivateModal';
+import LocationAuth from './LocationAuth';
+import '../style/mgkmap.css';
 
 class Mgkmap extends Component {
     constructor(props){
       // 초기화 담당
       super(props);
       this.state = {
-        currentAddress:''
+        modal:true,
+        currentAddress:'위치 파악 중...'
       }
     }
   mapContainer = React.createRef();
@@ -32,9 +36,14 @@ class Mgkmap extends Component {
             <div
                 className="main map"
                 ref={this.mapContainer}
-            >지도
+            >
                 <div className="map-element">
-                    위치인증: {this.state.currentAddress}
+                    <span className="map-address">위치인증: {this.state.currentAddress}</span>
+                    {this.state.modal && (
+                        <ModalPortal>
+                            <PrivateModal path="/location-auth" component={LocationAuth}/>
+                        </ModalPortal>
+                    )}
                     <button className="btn btn-auth-location">재인증하기</button>
                 </div>
                 
