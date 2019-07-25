@@ -37,8 +37,8 @@ class Mypage extends Component {
   }
   render(){
     return (
-      <section className="modal">
-        <div className="mypage">
+      <section className="modal-block">
+        <div className="mypage modal-window">
           <h2 className="mypage-title">회원정보 수정</h2>
           <div className="mypage-content">
             <img className="mypage-img"
