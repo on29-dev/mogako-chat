@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Route,BrowserRouter,Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Login from './components/Login';
+import Auth from './components/Auth';
+import PrivateModal from './components/PrivateModal';
 import Mainapp from './components/Mainapp';
 import Chatroom from './components/Chatroom';
 import Mypage from './components/Mypage';
@@ -68,21 +70,9 @@ class App extends Component {
   }
 }
 
-const isAuth = {
-  isAuthenticated:true,
-  login(cb) {
-    this.isAuthenticated = true
-    // setTimeout(cb, 100)
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    // setTimeout(cb, 100)
-  }
-}
-
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    isAuth.isAuthenticated === true
+    Auth.isAuthenticated === true
       ? <Component {...props} {...rest}/>
       : <Redirect to={{
         pathname: '/',
@@ -91,14 +81,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
-const PrivateModal = ({ component: Component, ...rest }) => (
-  isAuth.isAuthenticated === true
-    ? <Component {...rest}/>
-    : <Redirect to={'/'} />
-)
 
 const Header=({onClick})=>{
-  if(isAuth.isAuthenticated === true){
+  if(Auth.isAuthenticated === true){
     return (<header id="gnb" className="gnb">
         <h1 className="logo">모각코 맵(채팅)</h1>
         <nav className="navigator">
