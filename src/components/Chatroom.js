@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import SockJsClient from 'react-stomp';
+// import SockJsClient from 'react-stomp';
 import '../style/chatroom.css';
 
 class Chatroom extends Component {
   constructor(props){
     super(props);
     this.state={
-      chatroomId:this.props.location.state.chatId,
+      chatroomId:this.props.location.state.chatRoomId,
       memberId:this.props.memberId,
+      chatLog: [{time:'오후 02:13',msg:'안녕하세요'}, {time:'오후 02:13',msg:'인디아흔 아틸라티'}, {time:'오후 02:14',msg:'와신상담쓰'}]
     }
   }
   sendMessage = (msg) => {
