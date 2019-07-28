@@ -6,11 +6,11 @@ import '../style/mgkmap.css';
 
 class Mgkmap extends Component {
     constructor(props){
-      // 초기화 담당
       super(props);
       this.state = {
-        modal:true,
-        currentAddress:'위치 파악 중...'
+        modal:false,
+        isLocaAuth:false,
+        currentAddress:['미인증 상태']
       }
     }
   mapContainer = React.createRef();
@@ -41,19 +41,38 @@ class Mgkmap extends Component {
                     <span className="map-address">위치인증: {this.state.currentAddress}</span>
                     {this.state.modal && (
                         <ModalPortal>
-                            <PrivateModal path="/location-auth" component={LocationAuth}/>
+                            <PrivateModal path="/location-auth" component={LocationAuth}
+                                getCurrentPosition={this.getCurrentPosition}
+                            />
                         </ModalPortal>
                     )}
-                    <button className="btn btn-auth-location">재인증하기</button>
+                    <button 
+                        onClick={this.locationAuthToggle}
+                        className="btn btn-auth-location"
+                    >재인증하기</button>
                 </div>
                 
             </div>
         );
     }
 
-    componentDidUpdate(){
-        const {longitude,latitude} = this.props.currentCoords;
-        const currentCoords = new window.naver.maps.LatLng(latitude,longitude);
+    locationAuthToggle=_=>{
+        console.log()
+        this.setState({modal:!this.state.modal})
+    }
+    getCurrentPosition=_=>{
+        navigator.geolocation.getCurrentPosition(
+            res=>{
+                const lat = res.coords.latitude;
+                const long = res.coords.longitude;
+                this.locationAuth(lat,long);
+            },
+            err=>console.log('[getCurrentPosition] err',err)
+        )
+    }
+    locationAuth=(lat,long)=>{
+        console.log("locationAuth");
+        const currentCoords = new window.naver.maps.LatLng(lat,long);
         const {map} = this;
         if(!!this.currentMarker){
             this.currentMarker.setMap(null);
@@ -67,7 +86,12 @@ class Mgkmap extends Component {
             }
         })
         map.setCenter(currentCoords);
+        console.log(currentCoords)
         this.reverseGeocode(currentCoords)
+        this.setState({modal:false, isLocaAuth:true})
+        console.log(this.props)
+        this.props.setCurrentCoords(lat,long);
+        // this.resetChatroom()
     }
     reverseGeocode(currentCoords){
         window.naver.maps.Service.reverseGeocode({
@@ -89,6 +113,10 @@ class Mgkmap extends Component {
             }
         })
     };
+    componentDidUpdate(){
+        // 첫 로드시 서버로부터 인증된 위치 정보를 받아옴
+
+    }
 }
 
 export default Mgkmap;

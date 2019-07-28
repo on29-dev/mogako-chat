@@ -26,15 +26,22 @@ class Mainapp extends Component {
       ],
     }
   }
-  componentDidMount(){
-    navigator.geolocation.getCurrentPosition(
-      res=>{
-        const lat = res.coords.latitude;
-        const long = res.coords.longitude;
-        this.setState({currentCoords:{latitude: lat,longitude: long}})
-      },
-      err=>console.log('[getCurrentPosition] err',err)
-    )
+  setCurrentCoords=(lat,long)=>{
+    this.setState({currentCoords:{latitude:lat,longitude:long}})
+    const userid = this.props.userid
+    const CURRENT_LOCATION_URL=`/members/${userid}/auth-location`;
+    const dataLoad = {
+      memberCurrentGeolocation: `(${lat}, ${long})`
+    }
+    axios({method:'post', url:process.env.REACT_APP_SERVER_SOCKET_ID+CURRENT_LOCATION_URL,data:JSON.stringify(dataLoad),
+        // headers:{'Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '3600'}
+      })
+        .then(res => {
+          console.log('res',res);
+        })
+        .catch(err => {
+          console.log('err',err);
+        })
   }
   onSubmit=(...data)=>{
     if(!this.state.currentCoords.latitude || !this.state.currentCoords.longitude) {
@@ -47,7 +54,9 @@ class Mainapp extends Component {
       console.log(JSON.stringify(dataLoad));
       const SIGN_UP_URL='/chatroom/create';
       console.log('Submit', ...data);
-      axios({method:'post', url:SIGN_UP_URL, data:JSON.stringify(dataLoad)})
+      axios({method:'post', url:process.env.REACT_APP_SERVER_SOCKET_ID+SIGN_UP_URL,data:JSON.stringify(dataLoad),
+        headers:{'Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '3600'}
+      })
         .then(res => {
           console.log('[채팅방 개설] 완료', ...data)
           console.log('res',res);
@@ -63,12 +72,11 @@ class Mainapp extends Component {
     }
   }
   render() {
-    const {currentCoords,defaultCoords} = this.state
     return (
       <Fragment>
         <Mgkmap
-          currentCoords={currentCoords}
-          defaultCoords={defaultCoords}
+          setCurrentCoords={this.setCurrentCoords}
+          defaultCoords={this.state.defaultCoords}
         ></Mgkmap>
         <Chatlist
           chatList={this.state.chatList}
