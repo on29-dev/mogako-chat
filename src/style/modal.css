@@ -1,0 +1,39 @@
+.modal-block{
+  background: rgba(29,28,29,.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index:998;
+}
+.modal-window {
+  background: white;
+  border-radius:8px;
+  position: relative;
+  z-index:999;
+}
+
+.modal-title{
+  padding:20px 28px;
+  font-size:22px;
+  font-weight:700;
+}
+
+.modal-content{
+  padding:0 28px 20px 28px
+}
+
+.modal-content-comment{
+  margin-bottom:20px;
+}
+
+.btn-modal-close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}

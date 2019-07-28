@@ -21,11 +21,6 @@
   height: auto;
 }
 
-.mypage-title{
-  padding:20px 28px;
-  font-size:22px;
-  font-weight:700;
-}
 .mypage-content{
   padding:0 28px 20px 28px;
   position: relative;
@@ -63,13 +58,6 @@
   margin-bottom:8px;
   display: block;
   margin: 0px auto; 
-}
-
-.btn-close{
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
 }
 
 .btn-submit{
