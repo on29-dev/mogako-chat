@@ -17,7 +17,6 @@ class Mgkmap extends Component {
 
   componentDidMount(){
     let coords;
-    console.log(this.props)
     if(!this.props.currentCoords){
         coords = this.props.defaultCoords;
     } else {
@@ -64,7 +63,6 @@ class Mgkmap extends Component {
     }
 
     locationAuthToggle=_=>{
-        console.log()
         this.setState({modal:!this.state.modal})
     }
     getCurrentPosition=_=>{
