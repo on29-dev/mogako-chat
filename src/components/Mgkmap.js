@@ -17,25 +17,25 @@ class Mgkmap extends Component {
 
   componentDidMount(){
     let coords;
-    if(!this.props.currentCoords){
-        coords = this.props.defaultCoords;
-    } else {
-        coords = this.props.currentCoords
-    }
+    !this.props.currentCoords ? coords = this.props.defaultCoords : coords = this.props.currentCoords;
     const { latitude, longitude } = coords;
     const defaultCoords = new window.naver.maps.LatLng(latitude,longitude);
-        this.map = new window.naver.maps.Map(this.mapContainer.current, {
-            center: defaultCoords,
-            zoom:11,
-        });
-        this.currentMarker = new window.naver.maps.Marker({
-            position: defaultCoords,
-            title:'default 위치',
-            map: this.map,
-            icon:{
-                content: '<div style="width:20px;height:20px;background:#FF412E;border-radius:50%"></div>'
-            }
-        })
+    this.map = new window.naver.maps.Map(this.mapContainer.current, {
+        center: defaultCoords,
+        zoom:11,
+    });
+    this.currentMarker = new window.naver.maps.Marker({
+        position: defaultCoords,
+        title:'default 위치',
+        map: this.map,
+        icon:{
+            content: '<div style="width:20px;height:20px;background:#FF412E;border-radius:50%"></div>'
+        }
+    })
+    if(!!this.props.currentCoords) {
+        this.reverseGeocode(defaultCoords)
+        this.setState({isLocaAuth:!this.state.isLocaAuth})
+    }
     }
     render() {
         return (

@@ -7,10 +7,10 @@ class Mypage extends Component {
     super(props);
     this.state={
       skills:this.props.skills,
-      email:this.props.email,
+      email:this.props.useremail,
       username:this.props.username,
-      userSkill:this.props.userSkill,
-      imgUrl:this.props.imgUrl,
+      userSkills:this.props.userSkills,
+      imgUrl:this.props.profileImg,
       img:null,
     }
     this.fileInput = React.createRef();
@@ -76,7 +76,7 @@ class Mypage extends Component {
                 onChange={e=>this.inputFormHandler(e)}
               />
               <label htmlFor="username">Skill (only 1)</label>
-              <select value={this.state.userSkill[0]} type="text" name="userSkill" id="userSkill"
+              <select value={this.state.userSkills[0]} type="text" name="userSkill" id="userSkill"
                 onChange={e=>this.inputFormHandler(e)}
               >
                 {this.renderSelOpt()}
