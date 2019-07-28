@@ -75,6 +75,7 @@ class Mainapp extends Component {
     return (
       <Fragment>
         <Mgkmap
+          currentCoords={this.props.currentCoords}
           setCurrentCoords={this.setCurrentCoords}
           defaultCoords={this.state.defaultCoords}
         ></Mgkmap>

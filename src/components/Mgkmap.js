@@ -16,7 +16,14 @@ class Mgkmap extends Component {
   mapContainer = React.createRef();
 
   componentDidMount(){
-    const { latitude, longitude } = this.props.defaultCoords;
+    let coords;
+    console.log(this.props)
+    if(!this.props.currentCoords){
+        coords = this.props.defaultCoords;
+    } else {
+        coords = this.props.currentCoords
+    }
+    const { latitude, longitude } = coords;
     const defaultCoords = new window.naver.maps.LatLng(latitude,longitude);
         this.map = new window.naver.maps.Map(this.mapContainer.current, {
             center: defaultCoords,

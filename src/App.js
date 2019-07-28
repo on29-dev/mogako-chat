@@ -20,7 +20,7 @@ class App extends Component {
         userid:"유저아이디",
         username:"유저네임",
         profileImg:'https://i.stack.imgur.com/34AD2.jpg',
-        userGeolocation:"(lat,long)",
+        currentCoords:{latitude:37.546779400000005,longitude:126.9493497},
         userSkills:["JavaScript"]
       },
       skills: ["Python","Java","JavaScript","HTML","CSS","C#","PHP","C/C++","R","Objective-C","Swift","SQL","NoSQL","Matlab","TypeScript","Ruby","VBA","Kotlin","Go","Scala","Visual Basic","Perl","Rust","Lua", null]
