@@ -16,14 +16,14 @@ class App extends Component {
     this.state={
       modal:false,
       memberInfo:{
-        email:'abc@def.ghi',
-        username:'mockUser',
-        userSkill:['JavaScript'],
-        imgUrl:'https://i.stack.imgur.com/34AD2.jpg',
-        idToken:'123123123idTkn',
-        accessToken:'123123123acsTkn'
+        token:"token",
+        userid:"유저아이디",
+        username:"유저네임",
+        profileImg:'https://i.stack.imgur.com/34AD2.jpg',
+        userGeolocation:"(lat,long)",
+        userSkills:["JavaScript"]
       },
-      skills: ["Python","Java","JavaScript","HTML","CSS","C#","PHP","C/C++","R","Objective-C","Swift","SQL","NoSQL","Matlab","TypeScript","Ruby","VBA","Kotlin","Go","Scala","Visual Basic","Perl","Rust","Lua", "없음"]
+      skills: ["Python","Java","JavaScript","HTML","CSS","C#","PHP","C/C++","R","Objective-C","Swift","SQL","NoSQL","Matlab","TypeScript","Ruby","VBA","Kotlin","Go","Scala","Visual Basic","Perl","Rust","Lua", null]
     }
   }
   handleOpenModal=_=>{
@@ -55,7 +55,7 @@ class App extends Component {
       <BrowserRouter>
         <Header onClick={this.handleOpenModal}></Header>
         <Route exact path="/" component={Login}/>
-        <PrivateRoute path="/chatlist" component={Mainapp}/>
+        <PrivateRoute path="/chatlist" component={Mainapp} {...this.state.memberInfo}/>
         <PrivateRoute path="/chatroom" component={Chatroom} {...this.state.memberInfo}/>
         {this.state.modal && (
           <ModalPortal>
