@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../style/mypage.css'
+import '../style/mypage.css';
+import '../style/modal.css';
 
 class Mypage extends Component {
   constructor(props){
@@ -39,7 +40,7 @@ class Mypage extends Component {
     return (
       <section className="modal-block">
         <div className="mypage modal-window">
-          <h2 className="mypage-title">회원정보 수정</h2>
+          <h2 className="modal-title">회원정보 수정</h2>
           <div className="mypage-content">
             <img className="mypage-img"
             src={this.state.img ? URL.createObjectURL(this.state.img) : (this.state.imgUrl)}
@@ -84,7 +85,7 @@ class Mypage extends Component {
               <input type="submit" className="btn btn-submit" value="수정하기"/>
             </form>
           </div>
-          <i className="fas fa-times btn-close" onClick={this.props.onClose}></i>
+          <i className="fas fa-times btn-modal-close" onClick={this.props.onClose}></i>
         </div>
       </section>
     );
