@@ -37,10 +37,10 @@ class App extends Component {
       modal: false
     });
   };
-  onSubmit=(...data)=>{
+  onSubmit(...data) {
     const SIGN_UP_URL='';
     console.log('Submit', ...data);
-    axios({method:'post', url:SIGN_UP_URL, data:{...data}})
+    axios({method:'post', url:process.env.REACT_APP_SERVER_SOCKET_ID+SIGN_UP_URL, data:{...data}})
       .then(function (res) {
         console.log('[회원정보 수정] 완료')
         console.log(res);
@@ -51,10 +51,22 @@ class App extends Component {
         console.log(err);
       });
   }
+  logout(){
+    const LOGOUT_URL='/logout';
+    axios({method:'post', url:process.env.REACT_APP_SERVER_SOCKET_ID+LOGOUT_URL})
+      .then((res)=>{
+        console.log('[로그아웃]] 완료')
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log('[로그아웃] 실패')
+        console.log(err);
+      });
+  }
   render() {
     return (
       <BrowserRouter>
-        <Header onClick={this.handleOpenModal}></Header>
+        <Header openModal={this.handleOpenModal} logout={this.logout}></Header>
         <Route exact path="/" component={Login}/>
         <PrivateRoute path="/chatlist" component={Mainapp} {...this.state.memberInfo}/>
         <PrivateRoute path="/chatroom" component={Chatroom} {...this.state.memberInfo}/>
@@ -62,7 +74,7 @@ class App extends Component {
           <ModalPortal>
             <PrivateModal path="/mypage" component={Mypage} {...this.state.memberInfo} skills={this.state.skills}
             onClose={this.handleCloseModal}
-            onSubmit={this.onSubmit}
+            onSubmit={_=>this.onSubmit}
             />
           </ModalPortal>
         )}
@@ -83,14 +95,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 
-const Header=({onClick})=>{
+const Header=({openModal, logout})=>{
   if(Auth.isAuthenticated === true){
     return (<header id="gnb" className="gnb">
         <h1 className="logo">모각코 맵(채팅)</h1>
         <nav className="navigator">
           <ul>
-            <li onClick={onClick} style={{cursor:'pointer'}} >마이페이지</li>
-            <li>로그아웃</li>
+            <li onClick={openModal} style={{cursor:'pointer'}} >마이페이지</li>
+            <li onClick={logout} style={{cursor:'pointer'}} >로그아웃</li>
           </ul>
         </nav>
     </header>)
