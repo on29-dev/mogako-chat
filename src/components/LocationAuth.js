@@ -11,7 +11,7 @@ class LocationAuth extends Component {
           <div className="modal-content">
             <div className="modal-content-comment">{this.authComment().infoComment}</div>
             <button className="btn-submit"
-              onClick={this.getCurrentPosition}
+              onClick={this.props.getCurrentPosition}
             >{this.authComment().btnComment}</button>
           </div>
             {!!this.props.isLocaAuth

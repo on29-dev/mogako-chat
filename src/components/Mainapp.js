@@ -52,7 +52,7 @@ class Mainapp extends Component {
         mapMarkerLocation: `(${this.state.currentCoords.latitude}, ${this.state.currentCoords.longitude})`
       }
       console.log(JSON.stringify(dataLoad));
-      const SIGN_UP_URL='/chatroom/create';
+      const SIGN_UP_URL='/chatrooms';
       console.log('Submit', ...data);
       axios({method:'post', url:process.env.REACT_APP_SERVER_SOCKET_ID+SIGN_UP_URL,data:JSON.stringify(dataLoad),
         headers:{'Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '3600'}
