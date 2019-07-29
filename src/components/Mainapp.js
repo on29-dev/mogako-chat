@@ -10,8 +10,8 @@ class Mainapp extends Component {
     super(props);
     this.state = {
       currentCoords:{
-        longitude:0,
-        latitude:0
+        latitude:this.props.currentCoords.latitude,
+        longitude:this.props.currentCoords.longitude
       },
       defaultCoords:{
         longitude: 127.027711,
@@ -85,6 +85,19 @@ class Mainapp extends Component {
         ></Chatlist>
       </Fragment>
     );
+  }
+  componentDidMount(){
+    const GET_CHATLIST_URL='/chatrooms';
+    axios({method:'get', url:process.env.REACT_APP_SERVER_SOCKET_ID+GET_CHATLIST_URL,
+      headers:{'Access-Control-Allow-Origin': '*','Access-Control-Max-Age': '3600'}
+    })
+      .then(res=>{
+        console.log('res',res);
+        // this.setState({chatList:res.chatRoomList})
+      })
+      .catch(err=>{
+        console.log('err',err);
+      })
   }
 }
 
